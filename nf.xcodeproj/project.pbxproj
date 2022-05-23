@@ -27,6 +27,7 @@
 		C1B0EC19283C09F600683910 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C1B0EC20283C0A9B00683910 /* WSJT-X.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WSJT-X.h"; sourceTree = "<group>"; };
 		C1B0EC21283C1B6400683910 /* nf.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = nf.1; path = ../../../nf.1; sourceTree = "<group>"; };
+		C1B0EC22283C227400683910 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				C1B0EC19283C09F600683910 /* main.m */,
+				C1B0EC22283C227400683910 /* LICENSE.md */,
 				C1B0EC21283C1B6400683910 /* nf.1 */,
 				C1B0EC20283C0A9B00683910 /* WSJT-X.h */,
 			);
