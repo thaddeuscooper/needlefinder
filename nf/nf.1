@@ -1,0 +1,21 @@
+.Dd May 23, 2023
+.Dt NF 1
+.Os
+.Sh NAME
+.Nm nf
+.Nd needle finder
+.Sh SYNOPSIS
+.Nm
+.Ar gridsquare...
+.Sh DESCRIPTION
+.Nm
+is used to listen for UDP messages from WSJT-X and search for one or more
+Maidenhead grid squares that were listed on the command line. When a match is
+found, the date and time along with the message are printed. Additionally the
+terminal bell is rung.
+.Sh EXAMPLES
+.Nm
+CM97
+.Pp
+.Nm
+CM97 CM87 CO84
