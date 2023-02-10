@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E6E4C772995B225009A48CE /* MaidenheadGridSquares.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6E4C762995B225009A48CE /* MaidenheadGridSquares.m */; };
 		C1B0EC1A283C09F600683910 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0EC19283C09F600683910 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E6E4C752995B225009A48CE /* MaidenheadGridSquares.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaidenheadGridSquares.h; sourceTree = "<group>"; };
+		1E6E4C762995B225009A48CE /* MaidenheadGridSquares.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaidenheadGridSquares.m; sourceTree = "<group>"; };
 		C195419F284AB1A200FD9895 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C1B0EC16283C09F600683910 /* nf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nf; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B0EC19283C09F600683910 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 			children = (
 				C195419F284AB1A200FD9895 /* README.md */,
 				C1B0EC19283C09F600683910 /* main.m */,
+				1E6E4C752995B225009A48CE /* MaidenheadGridSquares.h */,
+				1E6E4C762995B225009A48CE /* MaidenheadGridSquares.m */,
 				C1B0EC22283C227400683910 /* LICENSE.md */,
 				C1B0EC21283C1B6400683910 /* nf.1 */,
 				C1B0EC20283C0A9B00683910 /* WSJT-X.h */,
@@ -101,6 +106,7 @@
 				TargetAttributes = {
 					C1B0EC15283C09F600683910 = {
 						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -127,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E6E4C772995B225009A48CE /* MaidenheadGridSquares.m in Sources */,
 				C1B0EC1A283C09F600683910 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,20 +253,35 @@
 		C1B0EC1E283C09F600683910 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F3WURT4KJY;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		C1B0EC1F283C09F600683910 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F3WURT4KJY;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
