@@ -11,6 +11,7 @@
 #include <time.h>
 #import <Foundation/Foundation.h>
 #import "WSJT-X.h"
+#import "MaidenheadGridSquares.h"
 
 #define BUFLEN  512
 #define NPACK   100
@@ -47,6 +48,9 @@ int main(int argc, const char * argv[]) {
         int                 flags;
         char                theString[255];
         ssize_t             rc;
+		MaidenheadGridSquares	*theGridSquares = [[MaidenheadGridSquares alloc] init];
+		NSMutableSet			*setOfGridSquares = [NSMutableSet set];
+		NSArray		*allGridSquares = [NSMutableArray array];
 
         bufferLength = BUFLEN;
         flags = 0;
@@ -55,8 +59,23 @@ int main(int argc, const char * argv[]) {
             for (int index = 1; index < argc; index++) {
                 printf("%s\n", argv[index]);
             }
+			
+			if (strcmp(argv[1], "-s") == 0) {
+				for (int index = 2; index < argc; index++) {
+					NSString *theEntity;
+					
+					theEntity = [[NSString stringWithCString:argv[index] encoding:NSASCIIStringEncoding] uppercaseString];
+					if ([[theGridSquares.maidenheadGridSquares allKeys] containsObject:theEntity]) {
+						NSLog(@"%@", [theGridSquares.maidenheadGridSquares valueForKey:theEntity]);
+						NSArray *nextGridSquares = [theGridSquares.maidenheadGridSquares valueForKey:theEntity];
+						[setOfGridSquares addObjectsFromArray:nextGridSquares];
+					}
+				}
+				allGridSquares = [[setOfGridSquares allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+			}
         }
         
+		
         slen = sizeof(si_other);
         s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
         if (s == -1) {
@@ -93,6 +112,11 @@ int main(int argc, const char * argv[]) {
                                 now = time(NULL);
                                 localTime = localtime(&now);
                                 ptr = (char *)argv[argvIndex];
+								NSString *stringToCheck = [[NSString alloc] initWithCString:theString encoding:NSASCIIStringEncoding];
+								if ([allGridSquares containsObject:stringToCheck]) {
+									fprintf(stdout, "\a%d/%d/%d %d:%02d %s\n", localTime->tm_mon + 1, localTime->tm_mday, localTime->tm_year + 1900, localTime->tm_hour, localTime->tm_min, theString);
+									fflush(stdout);
+								}
                                 if (strcontains(theString, ptr)) {
                                     fprintf(stdout, "\a%d/%d/%d %d:%02d %s\n", localTime->tm_mon + 1, localTime->tm_mday, localTime->tm_year + 1900, localTime->tm_hour, localTime->tm_min, theString);
                                     fflush(stdout);
