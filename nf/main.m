@@ -37,33 +37,39 @@ int strcontains(char *string, char *lookingFor) {
 }
 
 void showHelp(void) {
-	printf("usage: nf -e entities | -i entities | -h\n");
+	printf("usage:\n");
+	printf("nf -e entities...\n");
+	printf("nf -i entities...\n");
+	printf("nf grid squares...");
+	printf("nf -h\n");
+
 	printf("where -e listens for the entities and will alert when it finds one of them.\n");
 	printf("      -i lists the grid squares for the specified entities and exits.\n");
-	printf("      -h shows help.\n");
+	printf("      -h shows help and exits.\n");
 }
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        struct sockaddr_in  si_me;
-        struct sockaddr_in  si_other;
-        int                s;
-        int                 i;
-        socklen_t           slen;
-        char                buf[BUFLEN];
-        ssize_t             bufferLength;
-        int                 flags;
-        char                theString[255];
-        ssize_t             rc;
+        struct sockaddr_in  	si_me;
+        struct sockaddr_in  	si_other;
+        int                		s;
+        int                 	i;
+        socklen_t           	slen;
+        char                	buf[BUFLEN];
+        ssize_t             	bufferLength;
+        int                 	flags;
+        char                	theString[255];
+        ssize_t             	rc;
 		MaidenheadGridSquares	*theGridSquares = [[MaidenheadGridSquares alloc] init];
 		NSMutableSet			*setOfGridSquares = [NSMutableSet set];
-		NSArray		*allGridSquares = [NSMutableArray array];
+		NSMutableArray			*allGridSquares = [NSMutableArray array];
 
         bufferLength = BUFLEN;
         flags = 0;
         
         if (argc >= 2) {
 			if (strcmp(argv[1], "-e") == 0) {
+				// User is specifying an entity, so go get all the grid squares for that entity.
 				for (int index = 2; index < argc; index++) {
 					NSString *theEntity;
 					
@@ -73,8 +79,7 @@ int main(int argc, const char * argv[]) {
 						[setOfGridSquares addObjectsFromArray:nextGridSquares];
 					}
 				}
-				allGridSquares = [[setOfGridSquares allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-				//NSLog(@"Listening for: %@", allGridSquares);
+				allGridSquares = [[[setOfGridSquares allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] mutableCopy];
 				printf("Listening for:\n");
 				for (int gridSquaresIndex = 0; gridSquaresIndex < allGridSquares.count; gridSquaresIndex++) {
 					NSString *theGridSquare;
@@ -85,6 +90,7 @@ int main(int argc, const char * argv[]) {
 				printf("\n");
 			}
 			else if (strcmp(argv[1], "-i") == 0) {
+				// User wants a list of all grid squares for an entity, so get all the grid squares and print them out.
 				for (int index = 2; index < argc; index++) {
 					NSString *theEntity;
 					
@@ -104,16 +110,34 @@ int main(int argc, const char * argv[]) {
 				exit(0);
 			}
 			else if (strcmp(argv[1], "-h") == 0) {
+				// User needs help. Show help and exit.
 				showHelp();
 				exit(0);
 			}
+			else if (argv[1][0] == '-') {
+				// Unknown argument, so show help and exit.
+				printf("Unknown argument: %s\n", argv[1]);
+				showHelp();
+				exit(-3);
+			}
+			else {
+				// Otherwise, the user is specifying a list of grid squares to watch.
+				for (int index = 2; index < argc; index++) {
+					NSString	*theGridSquare;
+					
+					theGridSquare = [[NSString stringWithCString:argv[index] encoding:NSASCIIStringEncoding] uppercaseString];
+					if (theGridSquare.length >= 4) {
+						[allGridSquares addObject:theGridSquare];
+					}
+				}
+			}
         }
         
-		
         slen = sizeof(si_other);
         s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
         if (s == -1) {
-            abort();
+            printf("Unable to create socket, exiting. If you are not running multicast, it may be that another app is connected to WSJT-X.\n");
+			exit(-4);
         }
         
         memset((char *)&si_me, 0, sizeof(si_me));
@@ -125,7 +149,7 @@ int main(int argc, const char * argv[]) {
         rc = bind(s, (struct sockaddr *)&si_me, sizeof(si_me));
         if (rc == -1) {
 			close(s);
-			printf("Unable to connect to WSJT-X, exiting.");
+			printf("Unable to connect to WSJT-X, exiting.\n");
 			exit(-1);
         }
         
