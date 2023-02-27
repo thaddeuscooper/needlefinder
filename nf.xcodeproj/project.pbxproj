@@ -24,13 +24,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E50B79529A3153E005D185B /* nf.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = nf.1; sourceTree = "<group>"; };
 		1E6E4C752995B225009A48CE /* MaidenheadGridSquares.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaidenheadGridSquares.h; sourceTree = "<group>"; };
 		1E6E4C762995B225009A48CE /* MaidenheadGridSquares.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaidenheadGridSquares.m; sourceTree = "<group>"; };
 		C195419F284AB1A200FD9895 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C1B0EC16283C09F600683910 /* nf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nf; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B0EC19283C09F600683910 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C1B0EC20283C0A9B00683910 /* WSJT-X.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WSJT-X.h"; sourceTree = "<group>"; };
-		C1B0EC21283C1B6400683910 /* nf.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = nf.1; path = ../../../nf.1; sourceTree = "<group>"; };
 		C1B0EC22283C227400683910 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,8 +68,8 @@
 				C1B0EC19283C09F600683910 /* main.m */,
 				1E6E4C752995B225009A48CE /* MaidenheadGridSquares.h */,
 				1E6E4C762995B225009A48CE /* MaidenheadGridSquares.m */,
+				1E50B79529A3153E005D185B /* nf.1 */,
 				C1B0EC22283C227400683910 /* LICENSE.md */,
-				C1B0EC21283C1B6400683910 /* nf.1 */,
 				C1B0EC20283C0A9B00683910 /* WSJT-X.h */,
 			);
 			path = nf;

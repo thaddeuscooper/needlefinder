@@ -1,21 +1,79 @@
-.Dd May 23, 2023
+.\"-
+.\"
+.\"MIT License
+.\"
+.\"
+.\"Copyright (c) 2023 Thaddeus Cooper
+.\"
+.\"Permission is hereby granted, free of charge, to any person obtaining a copy
+.\"of this software and associated documentation files (the "Software"), to deal
+.\"in the Software without restriction, including without limitation the rights
+.\"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+.\"copies of the Software, and to permit persons to whom the Software is
+.\"furnished to do so, subject to the following conditions:
+.\"
+.\"The above copyright notice and this permission notice shall be included in all
+.\"copies or substantial portions of the Software.
+.\"
+.\"THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+.\"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+.\"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+.\"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+.\"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+.\"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+.\"SOFTWARE.
+.\"
+.Dd Feb 19, 2023
 .Dt NF 1
 .Os
 .Sh NAME
 .Nm nf
-.Nd needle finder
+.Nd needle finder listens for grid squares.
 .Sh SYNOPSIS
 .Nm
 .Ar gridsquare...
+.Nm
+.Ar -e entities...
+.Nm
+.Ar -i entities...
+.Nm
+.Ar -h
 .Sh DESCRIPTION
 .Nm
-is used to listen for UDP messages from WSJT-X and search for one or more
-Maidenhead grid squares that were listed on the command line. When a match is
-found, the date and time along with the message are printed. Additionally the
-terminal bell is rung.
+Needlefinder is used to listen for UDP messages from WSJT-X and search for one or more
+Maidenhead grid squares that were listed on the command line or were specified
+by an entity or list of entities. When a match is found, the date and time along with
+the message are printed. Additionally the terminal bell is rung.
+
+The following options are available:
+
+.Bl -tag -width indent
+.It Fl e 
+Use the grid squares for the following entities. This is useful if the list of grid squares for a specific entity are not known. Use this instead of just listing grid squares.
+
+.It Fl i 
+List the grid squares for the following entities and exit.
+
+.It Fl h
+Show help and exit.
+
 .Sh EXAMPLES
+Listen for stations in grid square CM97
+.Pp
 .Nm
 CM97
 .Pp
+Listen for stations in grid squares CM97 CM87 CO84
+.Pp
 .Nm
 CM97 CM87 CO84
+.Pp
+Listen for grid squares that are in Pennsylvania, New Jersey and California
+.Pp
+.Nm
+-e PA NJ CA
+.Pp
+Show the grid squares for Pennsylvania and California
+.Pp
+.Nm
+-i PA CA
